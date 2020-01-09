@@ -1,5 +1,5 @@
 #include <iostream>
-#include <queue>  //∂”¡–
+#include <queue> //ÈòüÂàó
 
 using namespace std;
 
@@ -7,62 +7,62 @@ template <class T>
 struct CTreeNode
 {
     T data;
-    CTreeNode* pLeftChild;
-    CTreeNode* pRigthChild;
+    CTreeNode *pLeftChild;
+    CTreeNode *pRigthChild;
 };
 template <class T>
 class CTree
 {
 public:
-    CTree(){}
-    ~CTree(){}
+    CTree() {}
+    ~CTree() {}
 
-    // ‰»Î
-    void initNodeTree(CTreeNode<T>* &pTmpTreeNode)
+    //ËæìÂÖ•
+    void initNodeTree(CTreeNode<T> *&pTmpTreeNode)
     {
         T tmp;
         cin >> tmp;
-        if (tmp == 0)  //0¥˙±Ìø’Ω⁄µ„
+        if (tmp == 0) //0‰ª£Ë°®Á©∫ËäÇÁÇπ
         {
             pTmpTreeNode = NULL;
         }
         else
         {
-            pTmpTreeNode = new CTreeNode < T > ;
+            pTmpTreeNode = new CTreeNode<T>;
             pTmpTreeNode->data = tmp;
             initNodeTree(pTmpTreeNode->pLeftChild);
             initNodeTree(pTmpTreeNode->pRigthChild);
         }
     }
-    //¥Ú”°
-    void preOrderTraveral(CTreeNode<T>* pTmpTreeNode)
+    //ÊâìÂç∞
+    void preOrderTraveral(CTreeNode<T> *pTmpTreeNode)
     {
         if (pTmpTreeNode == NULL)
         {
             return;
         }
-        //cout << pTmpTreeNode->data << "  ";    
-        //preOrderTraveral(pTmpTreeNode->pLeftChild);             //«∞–Ú
+        //cout << pTmpTreeNode->data << "  ";
+        //preOrderTraveral(pTmpTreeNode->pLeftChild);             //ÂâçÂ∫è
         //preOrderTraveral(pTmpTreeNode->pRigthChild);
 
         //preOrderTraveral(pTmpTreeNode->pLeftChild);
-        //cout << pTmpTreeNode->data << "  ";                     //÷––Ú
+        //cout << pTmpTreeNode->data << "  ";                     //‰∏≠Â∫è
         //preOrderTraveral(pTmpTreeNode->pRigthChild);
 
-        //preOrderTraveral(pTmpTreeNode->pLeftChild);             //∫Û–Ú
+        //preOrderTraveral(pTmpTreeNode->pLeftChild);             //ÂêéÂ∫è
         //preOrderTraveral(pTmpTreeNode->pRigthChild);
         //cout << pTmpTreeNode->data << "  ";
 
-        //≤„–Ú
-        queue<CTreeNode<T>*>queue;  
+        //Â±ÇÂ∫è
+        queue<CTreeNode<T> *> queue;
         queue.push(pTmpTreeNode);
-        CTreeNode<T>* curNode;
+        CTreeNode<T> *curNode;
 
         while (!queue.empty())
         {
             curNode = queue.front();
             cout << curNode->data;
-            if (curNode->pLeftChild!=NULL)
+            if (curNode->pLeftChild != NULL)
             {
                 queue.push(curNode->pLeftChild);
             }
@@ -73,13 +73,10 @@ public:
 
             queue.pop();
         }
-
-    
-
     }
 
-    //≤Èø¥‘™Àÿ «∑Ò¥Ê‘⁄”⁄ ˜÷–             
-    CTreeNode<T>* checkElement(CTreeNode<T>* _pTmpRootTreeNode, T _element)
+    //Êü•ÁúãÂÖÉÁ¥†ÊòØÂê¶Â≠òÂú®‰∫éÊ†ë‰∏≠
+    CTreeNode<T> *checkElement(CTreeNode<T> *_pTmpRootTreeNode, T _element)
     {
         if (pRootTreeNode == nullptr || _pTmpRootTreeNode == nullptr)
         {
@@ -88,17 +85,17 @@ public:
 
         if (_pTmpRootTreeNode->data == _element)
         {
-            cout << "¥Ê‘⁄!" << endl;
+            cout << "Â≠òÂú®!" << endl;
             return _pTmpRootTreeNode;
         }
 
-        CTreeNode<T>*PTmp1 = checkElement(_pTmpRootTreeNode->pLeftChild, _element);
+        CTreeNode<T> *PTmp1 = checkElement(_pTmpRootTreeNode->pLeftChild, _element);
         if (PTmp1 != nullptr)
         {
             return PTmp1;
         }
 
-        CTreeNode<T>*PTmp2 = checkElement(_pTmpRootTreeNode->pRigthChild, _element);
+        CTreeNode<T> *PTmp2 = checkElement(_pTmpRootTreeNode->pRigthChild, _element);
         if (PTmp2 != nullptr)
         {
             return PTmp2;
@@ -106,8 +103,8 @@ public:
         return nullptr;
     }
 
-    //«Û∏∏Ω⁄µ„
-    CTreeNode<T>* getFatherNode(CTreeNode<T>* _pTmpRootTreeNode, CTreeNode<T>* _pFoundTreeNode)
+    //Ê±ÇÁà∂ËäÇÁÇπ
+    CTreeNode<T> *getFatherNode(CTreeNode<T> *_pTmpRootTreeNode, CTreeNode<T> *_pFoundTreeNode)
     {
         if (_pTmpRootTreeNode == 0 || _pFoundTreeNode == 0 || pRootTreeNode == 0)
         {
@@ -118,13 +115,13 @@ public:
             return _pTmpRootTreeNode;
         }
 
-        CTreeNode<T>* pTmpTreeNode1 = getFatherNode(_pTmpRootTreeNode->pLeftChild, _pFoundTreeNode);
+        CTreeNode<T> *pTmpTreeNode1 = getFatherNode(_pTmpRootTreeNode->pLeftChild, _pFoundTreeNode);
         if (pTmpTreeNode1)
         {
             return pTmpTreeNode1;
         }
 
-        CTreeNode<T>* pTmpTreeNode2 = getFatherNode(_pTmpRootTreeNode->pRigthChild, _pFoundTreeNode);
+        CTreeNode<T> *pTmpTreeNode2 = getFatherNode(_pTmpRootTreeNode->pRigthChild, _pFoundTreeNode);
         if (pTmpTreeNode2)
         {
             return pTmpTreeNode2;
@@ -135,19 +132,16 @@ public:
 
 private:
     CTreeNode<T> *pRootTreeNode;
-
 };
 int main()
 
 {
-    CTreeNode<int>* text;
+    CTreeNode<int> *text;
     CTree<int> tree;
 
-    tree.initNodeTree(text);// ‰»Î
+    tree.initNodeTree(text); //ËæìÂÖ•
 
-    tree.preOrderTraveral(text); // ‰≥ˆ
+    tree.preOrderTraveral(text); //ËæìÂá∫
 
-   // cout << tree.checkElement(text, 5)->data << "µƒ∏∏Ω⁄µ„Œ™:" << tree.getFatherNode(text, tree.checkElement(text, 5))->data << endl;
-
-
+    // cout << tree.checkElement(text, 5)->data << "ÁöÑÁà∂ËäÇÁÇπ‰∏∫:" << tree.getFatherNode(text, tree.checkElement(text, 5))->data << endl;
 }
