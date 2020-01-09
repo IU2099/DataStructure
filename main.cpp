@@ -2,16 +2,16 @@
 #include <string>
 
 using namespace std;
-//Á´±í½Úµã¶¨Òå
-template<class T>
+//é“¾è¡¨èŠ‚ç‚¹å®šä¹‰
+template <class T>
 struct CNode
 {
     T data;
-    CNode<T>* pNextNode;
+    CNode<T> *pNextNode;
 };
 
-//Á´±íÀà½á¹¹
-template<class T>
+//é“¾è¡¨ç±»ç»“æ„
+template <class T>
 class CLinkedStack
 {
 public:
@@ -27,8 +27,8 @@ public:
     }
     ~CLinkedStack()
     {
-        CNode<T>*pTmpNode = NULL;
-        while (head!=tail)
+        CNode<T> *pTmpNode = NULL;
+        while (head != tail)
         {
             pTmpNode = head;
             head = head->pNextNode;
@@ -38,20 +38,20 @@ public:
         head = NULL;
         tail = NULL;
     }
-    //ÅĞ¶ÏÁ´±íÊÇ·ñ¿Õ
+    //åˆ¤æ–­é“¾è¡¨æ˜¯å¦ç©º
     bool empty()
     {
-        if (head==tail)
+        if (head == tail)
         {
             return true;
         }
         return false;
     }
-    //ÅĞ¶ÏÁ´±í³¤¶È
+    //åˆ¤æ–­é“¾è¡¨é•¿åº¦
     int size()
     {
         int count = 0;
-        CNode<T>*pTmpNode = NULL;
+        CNode<T> *pTmpNode = NULL;
         pTmpNode = head;
         while (pTmpNode != tail)
         {
@@ -60,10 +60,10 @@ public:
         }
         return count;
     }
-    //²éÄ³¸öÎ»ÖÃ
+    //æŸ¥æŸä¸ªä½ç½®
     T check(int index)
     {
-        CNode<T>*p = NULL;
+        CNode<T> *p = NULL;
         p = head->pNextNode;
         if (index < size() && (!empty()))
         {
@@ -79,41 +79,41 @@ public:
             throw str;
         }
     }
-    //·µ»ØµÚÒ»¸öÔªËØ
+    //è¿”å›ç¬¬ä¸€ä¸ªå…ƒç´ 
     T ofHome()
     {
         return head->pNextNode->data;
     }
-    //×îºóÒ»¸öÔªËØ
+    //æœ€åä¸€ä¸ªå…ƒç´ 
     T ofEnd()
     {
         return tail->data;
     }
-    //´ÓÁ´±íÎ²²¿²åÈëÔªËØ
+    //ä»é“¾è¡¨å°¾éƒ¨æ’å…¥å…ƒç´ 
     void push_End(T _elenemt)
     {
-        tail->pNextNode = new CNode < T > ;
+        tail->pNextNode = new CNode<T>;
         tail = tail->pNextNode;
         tail->data = _elenemt;
         tail->pNextNode = NULL;
     }
-    //´ÓÁ´±íÍ·²¿²åÈëÔªËØ
+    //ä»é“¾è¡¨å¤´éƒ¨æ’å…¥å…ƒç´ 
     void push_Home(T _elenemt)
     {
-        CNode<T>* pTmpNode = new CNode < T >;
+        CNode<T> *pTmpNode = new CNode<T>;
         pTmpNode->pNextNode = head;
         head = pTmpNode;
         pTmpNode->pNextNode->data = _elenemt;
     }
-    //´ÓÁ´±íÎ²²¿É¾³ıÔªËØ
+    //ä»é“¾è¡¨å°¾éƒ¨åˆ é™¤å…ƒç´ 
     void pop_End()
     {
         if (empty())
         {
-            string str = "error pop_End(),ÕâÊÇÒ»¸ö¿Õ±í";
+            string str = "error pop_End(),è¿™æ˜¯ä¸€ä¸ªç©ºè¡¨";
             throw str;
         }
-        CNode<T>*pTmpNode = head;
+        CNode<T> *pTmpNode = head;
         while (pTmpNode->pNextNode != tail)
         {
             pTmpNode = pTmpNode->pNextNode;
@@ -122,28 +122,28 @@ public:
         tail = pTmpNode;
         tail->pNextNode = NULL;
     }
-    //´ÓÁ´±íÍ·²¿É¾³ıÔªËØ
+    //ä»é“¾è¡¨å¤´éƒ¨åˆ é™¤å…ƒç´ 
     void pop_Home()
     {
         if (empty())
         {
-            string str = "error pop_Home(),ÕâÊÇÒ»¸ö¿Õ±í";
+            string str = "error pop_Home(),è¿™æ˜¯ä¸€ä¸ªç©ºè¡¨";
             throw str;
         }
-        CNode<T>*pTmpNode = head;
+        CNode<T> *pTmpNode = head;
         head = head->pNextNode;
         delete pTmpNode;
     }
-    // Ö¸¶¨Î»ÖÃÉ¾³ı
+    // æŒ‡å®šä½ç½®åˆ é™¤
     void delElement(int index)
     {
-        if((index<0)||index>=size())
+        if ((index < 0) || index >= size())
         {
             string str = "error delElement(int)";
             throw str;
         }
-        CNode<T>*pTmpNode = head;
-       // CNode<T>*qTmpNode = NULL;
+        CNode<T> *pTmpNode = head;
+        // CNode<T>*qTmpNode = NULL;
         while (index--)
         {
             pTmpNode = pTmpNode->pNextNode;
@@ -153,32 +153,32 @@ public:
         delete qTmpNode;
         qTmpNode = 0;
     }
-    //Ö¸¶¨Î»ÖÃ²åÈë
-    void addElement(int index,T _element)
+    //æŒ‡å®šä½ç½®æ’å…¥
+    void addElement(int index, T _element)
     {
         if ((index < 0) || index > size())
         {
             string str = "error addElement(int ,T)";
             throw str;
         }
-        if (empty()||(!empty() && index == 0))
+        if (empty() || (!empty() && index == 0))
         {
             push_Home(_element);
             return;
         }
-        if (index==size())
+        if (index == size())
         {
             push_End(_element);
             return;
         }
         else
         {
-            CNode<T>* pTmpNode = head;
+            CNode<T> *pTmpNode = head;
             while (index--)
             {
                 pTmpNode = pTmpNode->pNextNode;
             }
-            CNode<T>*qTmpNode = new CNode < T >;
+            CNode<T> *qTmpNode = new CNode<T>;
             qTmpNode->data = _element;
             qTmpNode->pNextNode = pTmpNode->pNextNode;
             pTmpNode->pNextNode = qTmpNode;
@@ -186,11 +186,9 @@ public:
     }
 
 private:
-    CNode<T>* head;
-    CNode<T>* tail;
+    CNode<T> *head;
+    CNode<T> *tail;
 };
-
-
 
 int main()
 {
